@@ -1,59 +1,47 @@
 const express = require('express');
-const cors = require('cors');
+const server = express();
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+// 1. 基础配置
+server.use(express.json({ limit: '10mb', strict: false }));
+server.use((req, res, next) => {
+  // 跨域配置（直接写在中间件里，避免cors包的额外依赖）
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+  next();
+});
 
-// 1. 跨域配置（优先加载）
-app.use(cors({
-  origin: ['https://ad-wall-front.vercel.app', 'https://ad-wall-back.vercel.app'],
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  preflightContinue: false,
-  optionsSuccessStatus: 204
-}));
-
-// 2. 解析请求体
-app.use(express.json({ limit: '10mb', strict: false }));
-
-// 3. 内存存储（替代本地文件，解决Vercel文件操作崩溃）
-let ads = []; // 广告数据
+// 2. 内存存储（无文件操作，避免崩溃）
+let ads = [];
 const formConfig = {
   title: '广告表单',
   fields: ['title', 'description', 'link', 'videos']
 };
 
-// 4. 根路径路由（最简逻辑）
-app.get('/', (req, res) => {
+// 3. 路由定义
+server.get('/', (req, res) => {
   res.status(200).json({
     success: true,
     message: '广告墙后端服务运行正常',
     docs: {
       广告列表: 'GET /api/ads',
-      创建广告: 'POST /api/ads',
       表单配置: 'GET /api/form-config'
     }
   });
 });
 
-// 5. 表单配置接口
-app.get('/api/form-config', (req, res) => {
-  res.status(200).json({
-    success: true,
-    data: formConfig
-  });
+server.get('/api/form-config', (req, res) => {
+  res.status(200).json({ success: true, data: formConfig });
 });
 
-// 6. 广告接口（纯内存操作，无文件依赖）
-app.get('/api/ads', (req, res) => {
-  res.status(200).json({
-    success: true,
-    data: ads
-  });
+server.get('/api/ads', (req, res) => {
+  res.status(200).json({ success: true, data: ads });
 });
 
-app.post('/api/ads', (req, res) => {
+server.post('/api/ads', (req, res) => {
   try {
     const newAd = {
       id: Date.now().toString(),
@@ -62,87 +50,56 @@ app.post('/api/ads', (req, res) => {
       ...req.body
     };
     ads.push(newAd);
-    res.status(201).json({
-      success: true,
-      data: newAd
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: '创建广告失败',
-      error: error.message
-    });
+    res.status(201).json({ success: true, data: newAd });
+  } catch (err) {
+    res.status(500).json({ success: false, message: '创建广告失败', error: err.message });
   }
 });
 
-app.put('/api/ads/:id', (req, res) => {
+server.put('/api/ads/:id', (req, res) => {
   try {
     const index = ads.findIndex(ad => ad.id === req.params.id);
-    if (index === -1) {
-      return res.status(404).json({ success: false, message: '广告不存在' });
-    }
+    if (index === -1) return res.status(404).json({ success: false, message: '广告不存在' });
     ads[index] = { ...ads[index], ...req.body };
-    res.status(200).json({
-      success: true,
-      data: ads[index]
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: '更新广告失败',
-      error: error.message
-    });
+    res.status(200).json({ success: true, data: ads[index] });
+  } catch (err) {
+    res.status(500).json({ success: false, message: '更新广告失败', error: err.message });
   }
 });
 
-app.delete('/api/ads/:id', (req, res) => {
+server.delete('/api/ads/:id', (req, res) => {
   try {
-    const initialLength = ads.length;
+    const initialLen = ads.length;
     ads = ads.filter(ad => ad.id !== req.params.id);
-    if (ads.length === initialLength) {
-      return res.status(404).json({ success: false, message: '广告不存在' });
-    }
-    res.status(200).json({
-      success: true,
-      message: '广告删除成功'
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: '删除广告失败',
-      error: error.message
-    });
+    if (ads.length === initialLen) return res.status(404).json({ success: false, message: '广告不存在' });
+    res.status(200).json({ success: true, message: '广告删除成功' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: '删除广告失败', error: err.message });
   }
 });
 
-app.patch('/api/ads/:id/click', (req, res) => {
+server.patch('/api/ads/:id/click', (req, res) => {
   try {
     const index = ads.findIndex(ad => ad.id === req.params.id);
-    if (index === -1) {
-      return res.status(404).json({ success: false, message: '广告不存在' });
-    }
+    if (index === -1) return res.status(404).json({ success: false, message: '广告不存在' });
     ads[index].clicked = (ads[index].clicked || 0) + 1;
-    res.status(200).json({
-      success: true,
-      data: ads[index]
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: '更新点击数失败',
-      error: error.message
-    });
+    res.status(200).json({ success: true, data: ads[index] });
+  } catch (err) {
+    res.status(500).json({ success: false, message: '更新点击数失败', error: err.message });
   }
 });
 
-// 7. 404兜底路由
-app.use('*', (req, res) => {
+// 4. 404兜底
+server.use('*', (req, res) => {
   res.status(404).json({
     success: false,
     message: '接口不存在',
-    tip: '请访问 /api/ads 或 /api/form-config 查看有效接口'
+    tip: '有效接口：/api/ads、/api/form-config'
   });
 });
 
-// 8. 导出Express实例（无阻塞操作）
-module.exports = app;
+// 5. 核心：导出Vercel Serverless兼容的请求处理函数
+module.exports = (req, res) => {
+  // 确保Express处理完所有路由
+  server(req, res);
+};
