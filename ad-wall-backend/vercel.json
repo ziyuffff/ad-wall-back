@@ -2,11 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "app.js", // 指向后端入口文件，而非package.json
-      "use": "@vercel/node" // 告诉Vercel这是Node.js Serverless函数
+      "src": "app.js",
+      "use": "@vercel/node" 
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/app.js" } // 仅转发/api开头的请求到app.js
+    { "src": "/api/(.*)", "dest": "/app.js" } 
   ]
 }
+
