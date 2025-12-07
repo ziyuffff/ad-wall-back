@@ -1,0 +1,8 @@
+[
+  { "field": "title", "name": "广告标题", "validator": { "required": true, "maxLength": 20 } },
+  { "field": "author", "name": "发布者信息", "validator": { "required": true, "maxLength": 30 } },
+  { "field": "content", "name": "广告内容文案", "validator": { "required": true, "maxLength": 200 } },
+  { "field": "url", "name": "落地页URL", "validator": { "required": true, "maxLength": 100, "isUrl": true } },
+  { "field": "pricing", "name": "出价", "validator": { "required": true, "min": 0 } },
+  { "field": "videos", "name": "视频", "validator": { "maxLength": 3 } }
+]

@@ -1,0 +1,116 @@
+[
+  {
+    "id": "1763521463351",
+    "title": "巨量引擎",
+    "author": "字节⼴告君",
+    "content": "巨量引擎是字节跳动旗下综合的数字化营销服\n务平台，致⼒于让不分体量、地域的企业及个\n体，都能通过数字化技术激发创造、驱动⽣\n意，实现商业的可持续增⻓。",
+    "url": "https://www.oceanengine.com/",
+    "pricing": 1,
+    "clicked": 40,
+    "videos": [
+      "http://localhost:3000/uploads/1763522756478-054e3d3a1b7d7e5072221f92cec3a859.mp4",
+      "http://localhost:3000/uploads/1763522762095-d38277d0423e824c63e31a0a63a028b2.mp4",
+      "http://localhost:3000/uploads/1763524279106-0418651477a0d96fe642295e50ff0234.mp4"
+    ]
+  },
+  {
+    "id": "1763526564875",
+    "title": "复制-巨量引擎",
+    "author": "字节⼴告君",
+    "content": "巨量引擎是字节跳动旗下综合的数字化营销服\n务平台，致⼒于让不分体量、地域的企业及个\n体，都能通过数字化技术激发创造、驱动⽣\n意，实现商业的可持续增⻓。",
+    "url": "https://www.oceanengine.com/",
+    "pricing": 300,
+    "clicked": 5,
+    "videos": []
+  },
+  {
+    "id": "1763528645526",
+    "title": "复制-复制-巨量引擎啦啦啦啦啦啦啦",
+    "author": "字节⼴告君",
+    "content": "巨量引擎是字节跳动旗下综合的数字化营销服\n务平台，致⼒于让不分体量、地域的企业及个\n体，都能通过数字化技术激发创造、驱动⽣\n意，实现商业的可持续增⻓。",
+    "url": "https://www.oceanengine.com/",
+    "pricing": 5,
+    "clicked": 4,
+    "videos": []
+  },
+  {
+    "id": "1763543341036",
+    "title": "复制-巨量引擎3",
+    "author": "字节⼴告君",
+    "content": "巨量引擎是字节跳动旗下综合的数字化营销服\n务平台，致⼒于让不分体量、地域的企业及个\n体，都能通过数字化技术激发创造、驱动⽣\n意，实现商业的可持续增⻓。",
+    "url": "https://www.oceanengine.com/",
+    "pricing": 300,
+    "clicked": 2,
+    "videos": []
+  },
+  {
+    "id": "1764817621536",
+    "title": "xxx电影",
+    "author": "工作室",
+    "content": "快来看电影！",
+    "url": "https://www.shanghaidisneyresort.com/",
+    "pricing": 20,
+    "videos": [
+      "http://localhost:3000/uploads/1764817969168-39498361.mp4",
+      "http://localhost:3000/uploads/1764817973616-111954950.mp4",
+      "http://localhost:3000/uploads/1764817977769-902348273.mp4"
+    ],
+    "clicked": 9,
+    "logicScore": 430.2
+  },
+  {
+    "id": "1764818394052",
+    "title": "疯狂动物城电影",
+    "author": "迪士尼",
+    "content": "快来看电影！",
+    "url": "https://www.shanghaidisneyresort.com/",
+    "pricing": 90,
+    "videos": [
+      "http://localhost:3000/uploads/1764817969168-39498361.mp4",
+      "http://localhost:3000/uploads/1764817973616-111954950.mp4",
+      "http://localhost:3000/uploads/1764817977769-902348273.mp4"
+    ],
+    "clicked": 2,
+    "logicScore": 392.4
+  },
+  {
+    "id": "1764819074317",
+    "title": "疯狂动物城电影",
+    "author": "迪士尼",
+    "content": "快来看电影！",
+    "url": "https://www.shanghaidisneyresort.com/",
+    "pricing": 90,
+    "videos": [
+      "http://localhost:3000/uploads/1764817969168-39498361.mp4",
+      "http://localhost:3000/uploads/1764817973616-111954950.mp4",
+      "http://localhost:3000/uploads/1764817977769-902348273.mp4"
+    ],
+    "clicked": 1,
+    "logicScore": 430.2
+  },
+  {
+    "id": "1764825737097",
+    "title": "副本-疯狂动物城电影",
+    "author": "迪士尼",
+    "content": "快来看电影！",
+    "url": "https://www.shanghaidisneyresort.com/",
+    "pricing": 90,
+    "videos": [
+      "http://localhost:3000/uploads/1764817969168-39498361.mp4",
+      "http://localhost:3000/uploads/1764817973616-111954950.mp4",
+      "http://localhost:3000/uploads/1764817977769-902348273.mp4"
+    ],
+    "clicked": 1,
+    "logicScore": 430.2
+  },
+  {
+    "id": "1764834279859",
+    "title": "1111",
+    "author": "工作室",
+    "content": "1",
+    "url": "https://www.shanghaidisneyresort.com/",
+    "pricing": 34,
+    "videos": [],
+    "clicked": 0
+  }
+]
